@@ -4,17 +4,26 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-@Table(name = Product.TABLE_NAME)
+import java.util.Set;
+
+@Table(name = "products")
 @Entity @Data @NoArgsConstructor @AllArgsConstructor
 public class Product {
-    public static final String TABLE_NAME= "products";
 
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_gen")
-    @SequenceGenerator(name = "product_gen", sequenceName = "hibernate_sequence", allocationSize=1)
     @Id
     private Integer id;
     private String name;
+    private String description;
     private float price;
+    private int stock;
 
-
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "order_product",
+            joinColumns = {
+                @JoinColumn(name = "product_id", referencedColumnName = "id")
+            },
+            inverseJoinColumns = {
+                @JoinColumn(name = "order_id", referencedColumnName = "id")
+            })
+    private Set<Order> orders;
 }

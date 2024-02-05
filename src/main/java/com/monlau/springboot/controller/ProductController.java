@@ -4,10 +4,11 @@ import com.monlau.springboot.model.Product;
 import com.monlau.springboot.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/products")
+@RequestMapping("/api/products/")
 public class ProductController {
 
     @Autowired
@@ -19,7 +20,7 @@ public class ProductController {
         return productService.list();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public Product getProductById(@PathVariable Integer id) {
         return productService.findProductById(id);
     }
@@ -29,12 +30,12 @@ public class ProductController {
         productService.saveProduct(product);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     public void updateProduct(@PathVariable Integer id, @RequestBody Product product) {
         productService.saveProduct(product);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public void deleteProduct(@PathVariable Integer id) {
         productService.deleteProduct(id);
     }
