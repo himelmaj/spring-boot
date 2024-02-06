@@ -17,11 +17,6 @@ public class Order {
         private Integer id;
         private Timestamp date_order;
 
-        @ManyToMany
-        @JoinTable(
-                name = "order_product",
-                joinColumns = @JoinColumn(name = "order_id"),
-                inverseJoinColumns = @JoinColumn(name = "product_id")
-        )
-        public Set<Product> products = new HashSet<>();
+        @OneToMany(mappedBy = "order")
+        public Set<OrderProduct> orderProducts;
 }

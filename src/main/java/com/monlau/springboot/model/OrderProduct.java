@@ -1,2 +1,27 @@
-package com.monlau.springboot.model;public class OrderProduct {
+package com.monlau.springboot.model;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Table(name = "order_product")
+@Entity @Data @NoArgsConstructor @AllArgsConstructor
+public class OrderProduct {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    private int quantity;
+
+    private float unit_price;
+
+
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    public Order order;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 }

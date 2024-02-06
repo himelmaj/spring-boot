@@ -20,6 +20,6 @@ public class Product {
     private float price;
     private int stock;
 
-    @ManyToMany(mappedBy = "products")
-    public Set<Order> orders = new HashSet<>();
+    @OneToMany(mappedBy = "product")
+    public Set<OrderProduct> orderProducts;
 }
