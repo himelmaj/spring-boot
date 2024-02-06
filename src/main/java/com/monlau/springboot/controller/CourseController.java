@@ -1,2 +1,4 @@
-package com.monlau.springboot.controller;public class CourseController {
+package com.monlau.springboot.controller;
+
+public class CourseController {
 }

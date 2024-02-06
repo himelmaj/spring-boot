@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Table(name = "orders")
@@ -15,6 +17,11 @@ public class Order {
         private Integer id;
         private Timestamp date_order;
 
-        @ManyToMany(mappedBy = "orders", fetch = FetchType.EAGER)
-        private Set<Product> products;
+        @ManyToMany
+        @JoinTable(
+                name = "order_product",
+                joinColumns = @JoinColumn(name = "order_id"),
+                inverseJoinColumns = @JoinColumn(name = "product_id")
+        )
+        public Set<Product> products = new HashSet<>();
 }

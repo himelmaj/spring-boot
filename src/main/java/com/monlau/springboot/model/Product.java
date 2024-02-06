@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.HashSet;
 import java.util.Set;
 
 @Table(name = "products")
@@ -11,19 +13,13 @@ import java.util.Set;
 public class Product {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String description;
     private float price;
     private int stock;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "order_product",
-            joinColumns = {
-                @JoinColumn(name = "product_id", referencedColumnName = "id")
-            },
-            inverseJoinColumns = {
-                @JoinColumn(name = "order_id", referencedColumnName = "id")
-            })
-    private Set<Order> orders;
+    @ManyToMany(mappedBy = "products")
+    public Set<Order> orders = new HashSet<>();
 }
