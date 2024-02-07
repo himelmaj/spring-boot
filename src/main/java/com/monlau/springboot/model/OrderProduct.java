@@ -1,5 +1,6 @@
 package com.monlau.springboot.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,9 +21,10 @@ public class OrderProduct {
 
     @ManyToOne
     @JoinColumn(name = "order_id")
-    public Order order;
+    @JsonIgnore
+    private Order order;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    public Product product;
+    private Product product;
 }

@@ -5,8 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.HashSet;
+import java.util.Collection;
 import java.util.Set;
 
 @Table(name = "products")
@@ -21,7 +20,7 @@ public class Product {
     private float price;
     private int stock;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
     @JsonIgnore
-    public Set<OrderProduct> orderProducts = new HashSet<>();
+    private Collection<OrderProduct> orders;
 }
