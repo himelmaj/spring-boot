@@ -15,4 +15,25 @@ public class OrderService {
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }
+
+    public Order getOrderById(Integer id) {
+        return orderRepository.findById(id).orElse(null);
+    }
+
+    public Order saveOrder(Order order) {
+        return orderRepository.save(order);
+    }
+
+    public void deleteOrder(Integer id) {
+        orderRepository.deleteById(id);
+    }
+
+    public Order updateOrder(Order order) {
+        return orderRepository.save(order);
+    }
+
+    public Order getOrderWithProducts(Integer orderId) {
+        return orderRepository.findById(orderId).orElseThrow(() -> new RuntimeException("Order not found"));
+    }
+
 }

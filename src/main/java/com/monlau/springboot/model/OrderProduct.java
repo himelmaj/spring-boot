@@ -1,5 +1,6 @@
 package com.monlau.springboot.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,5 +24,5 @@ public class OrderProduct {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    private Product product;
+    public Product product;
 }

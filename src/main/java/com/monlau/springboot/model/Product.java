@@ -1,5 +1,6 @@
 package com.monlau.springboot.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,5 +22,6 @@ public class Product {
     private int stock;
 
     @OneToMany(mappedBy = "product")
-    public Set<OrderProduct> orderProducts;
+    @JsonIgnore
+    public Set<OrderProduct> orderProducts = new HashSet<>();
 }

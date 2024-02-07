@@ -1,12 +1,12 @@
 package com.monlau.springboot.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.sql.Timestamp;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Table(name = "orders")
@@ -18,5 +18,6 @@ public class Order {
         private Timestamp date_order;
 
         @OneToMany(mappedBy = "order")
-        public Set<OrderProduct> orderProducts;
+        @JsonIgnore
+        public Set<OrderProduct> orderProducts = new HashSet<>();
 }
